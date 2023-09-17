@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
@@ -10,6 +11,9 @@ import { AppRoute } from '../../const';
 function MyQuestsPage () {
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room. Мои бронирования</title>
+      </Helmet>
       <Header isAuthorized currentPage={AppRoute.MyQuests}/>
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">

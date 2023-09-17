@@ -1,4 +1,5 @@
 //import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { QuestGenreList } from '../../components/quest-genre-list/quest-genre-list';
@@ -21,8 +22,10 @@ function MainPage ({ isAuthorized }: MainPageProps) {
 
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room</title>
+      </Helmet>
       <Header isAuthorized={isAuthorized} currentPage={AppRoute.Main}/>
-
       <main className="page-content">
         <div className="container">
           <div className="page-content__title-wrapper">

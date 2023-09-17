@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { BookingForm } from '../../components/boooking-form/booking-form';
@@ -10,6 +11,9 @@ type BookingPageProps = {
 function BookingPage ({ isAuthorized }: BookingPageProps) {
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room. Бронирование квеста</title>
+      </Helmet>
       <Header isAuthorized={isAuthorized} currentPage={AppRoute.Booking} />
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">

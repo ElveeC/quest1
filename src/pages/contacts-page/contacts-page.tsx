@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { AppRoute } from '../../const';
@@ -9,6 +10,9 @@ type ContactsPageProps = {
 function ContactsPage ({ isAuthorized }: ContactsPageProps) {
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room. Контакты</title>
+      </Helmet>
       <Header isAuthorized={isAuthorized} currentPage={AppRoute.Contacts}/>
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">

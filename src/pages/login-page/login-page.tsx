@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { AppRoute } from '../../const';
@@ -10,6 +11,9 @@ function LoginPage (/*{ isAuthorized }: LoginPageProps*/) {
 
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room. Войти</title>
+      </Helmet>
       <Header isAuthorized={false} currentPage={AppRoute.Login}/>
       <main className="decorated-page login">
         <div className="decorated-page__decor" aria-hidden="true">

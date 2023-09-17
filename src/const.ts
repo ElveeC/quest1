@@ -13,6 +13,7 @@ const enum AppRoute {
   Reservation = '/reservation',
   MyQuests = '/my-quests',
   Contacts = '/contacts',
+  NotFound = '/notfound',
 }
 
 export { AuthorizationStatus, AppRoute };

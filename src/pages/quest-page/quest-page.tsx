@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
@@ -10,6 +11,9 @@ type QuestPageProps = {
 function QuestPage ({ isAuthorized }: QuestPageProps) {
   return (
     <div className="wrapper">
+      <Helmet>
+        <title>Escape room. Квест</title>
+      </Helmet>
       <Header isAuthorized={isAuthorized} currentPage={AppRoute.Quest}/>
       <main className="decorated-page quest-page">
         <div className="decorated-page__decor" aria-hidden="true">
