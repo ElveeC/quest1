@@ -4,4 +4,15 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AuthorizationStatus };
+const enum AppRoute {
+  Main = '/',
+  Quest = '/quest',
+  Login = '/login',
+  Logout = '/logout',
+  Booking = '/booking',
+  Reservation = '/reservation',
+  MyQuests = '/my-quests',
+  Contacts = '/contacts',
+}
+
+export { AuthorizationStatus, AppRoute };
