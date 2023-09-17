@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 type LogoProps = {
@@ -16,11 +17,11 @@ function Logo ({ currentPage }: LogoProps) {
   }
 
   return (
-    <a className="logo header__logo" href="index.html" aria-label="Перейти на Главную">
+    <Link className="logo header__logo" to={AppRoute.Main} aria-label="Перейти на Главную">
       <svg width="134" height="52" aria-hidden="true">
         <use xlinkHref="#logo"></use>
       </svg>
-    </a>
+    </Link>
   );
 }
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { AppRoute } from '../../const';
@@ -30,7 +31,9 @@ function MyQuestsPage () {
                 </picture>
               </div>
               <div className="quest-card__content">
-                <div className="quest-card__info-wrapper"><a className="quest-card__link" href="quest.html">Маньяк</a><span className="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
+                <div className="quest-card__info-wrapper">
+                  <Link className="quest-card__link" to={AppRoute.Quest}>Маньяк</Link>
+                  <span className="quest-card__info">[сегодня,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
                 </div>
                 <ul className="tags quest-card__tags">
                   <li className="tags__item">
@@ -55,7 +58,9 @@ function MyQuestsPage () {
                 </picture>
               </div>
               <div className="quest-card__content">
-                <div className="quest-card__info-wrapper"><a className="quest-card__link" href="quest.html">Тайны старого особняка</a><span className="quest-card__info">[завтра,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
+                <div className="quest-card__info-wrapper">
+                  <Link className="quest-card__link" to={AppRoute.Quest}>Тайны старого особняка</Link>
+                  <span className="quest-card__info">[завтра,&nbsp;17:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
                 </div>
                 <ul className="tags quest-card__tags">
                   <li className="tags__item">
@@ -80,7 +85,9 @@ function MyQuestsPage () {
                 </picture>
               </div>
               <div className="quest-card__content">
-                <div className="quest-card__info-wrapper"><a className="quest-card__link" href="quest.html">Маньяк</a><span className="quest-card__info">[завтра,&nbsp;20:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
+                <div className="quest-card__info-wrapper">
+                  <Link className="quest-card__link" to={AppRoute.Quest}>Маньяк</Link>
+                  <span className="quest-card__info">[завтра,&nbsp;20:00. наб. реки Карповки&nbsp;5, лит&nbsp;П<br/>м. Петроградская]</span>
                 </div>
                 <ul className="tags quest-card__tags">
                   <li className="tags__item">

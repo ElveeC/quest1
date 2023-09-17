@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { QuestType } from '../../types/quest-type';
 
 type QuestCardProps = {
@@ -18,7 +20,7 @@ function QuestCard ({ quest }: QuestCardProps) {
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <a className="quest-card__link" href="#">{title}</a>
+          <Link className="quest-card__link" to={AppRoute.Quest}>{title}</Link>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">

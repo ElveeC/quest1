@@ -4,6 +4,7 @@ import { LoginPage } from '../../pages/login-page/login-page';
 import { QuestPage } from '../../pages/quest-page/quest-page';
 import { MyQuestsPage } from '../../pages/my-quests-page/my-quests-page';
 import { BookingPage } from '../../pages/booking-page/booking-page';
+import { ContactsPage } from '../../pages/contacts-page/contacts-page';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 type AppProps = {
@@ -37,6 +38,11 @@ function App ({ authorizationStatus }: AppProps) {
         <Route
           path={AppRoute.Booking}
           element={<BookingPage isAuthorized={isAuthorized}/>}
+        />
+
+        <Route
+          path={AppRoute.Contacts}
+          element={<ContactsPage isAuthorized={isAuthorized}/>}
         />
 
       </Routes>
