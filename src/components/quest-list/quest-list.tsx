@@ -1,10 +1,14 @@
 import { QuestCard } from '../quest-card/quest-card';
-import { QUESTS } from '../../mocks/quest-mocks';
+import { QuestType } from '../../types/quest-type';
 
-function QuestList () {
+type QuestCardProps = {
+  quests: QuestType[];
+}
+
+function QuestList ({quests}: QuestCardProps) {
   return (
     <div className="cards-grid">
-      {QUESTS.map((quest) => (
+      {quests.map((quest) => (
         <QuestCard key={quest.id} quest={quest}/>
       ))}
     </div>

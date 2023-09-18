@@ -14,13 +14,13 @@ function QuestCard ({ quest }: QuestCardProps) {
     <div className="quest-card" id={id}>
       <div className="quest-card__img">
         <picture>
-          <source type="image/webp" srcSet={previewImgWebp} />
+          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp} 2x`} />
           <img src={previewImg} srcSet={coverImg} width="344" height="232" alt={`${title}.`} />
         </picture>
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <Link className="quest-card__link" to={AppRoute.Quest}>{title}</Link>
+          <Link className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>{title}</Link>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">

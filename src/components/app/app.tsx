@@ -9,6 +9,7 @@ import { ContactsPage } from '../../pages/contacts-page/contacts-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { QUESTS } from '../../mocks/quest-mocks';
 
 type AppProps = {
   authorizationStatus: AuthorizationStatus;
@@ -26,8 +27,8 @@ function App ({ authorizationStatus }: AppProps) {
             element={<MainPage isAuthorized={isAuthorized} />}
           />
           <Route
-            path={AppRoute.Quest}
-            element={<QuestPage isAuthorized={isAuthorized}/>}
+            path={`${AppRoute.Quest}/:id`}
+            element={<QuestPage isAuthorized={isAuthorized} quests={QUESTS}/>}
           />
           <Route
             path={AppRoute.Login}
