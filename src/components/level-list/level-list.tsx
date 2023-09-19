@@ -1,26 +1,31 @@
-function LevelList () {
+import { useState } from 'react';
+import { ChangeEvent } from 'react';
+import { LevelDictionary, INITIAL_LEVEL } from '../../const';
+import { capitalize } from '../../utils';
+
+/*type LevelListProps = {
+  checkedLevel: string;
+}*/
+
+function LevelList (/*{ checkedLevel }: LevelListProps*/) {
+
+  const [checkedLevel, setCheckedLevel] = useState(INITIAL_LEVEL);
+  const handleLevelChange = (evt: ChangeEvent) => {
+    if (!evt.currentTarget.id) {
+      return;
+    }
+    setCheckedLevel(evt.target.id);
+  };
+
   return (
     <ul className="filter__list">
-      <li className="filter__item">
-        <input type="radio" name="level" id="any" defaultChecked />
-        <label className="filter__label" htmlFor="any"><span className="filter__label-text">Любой</span>
-        </label>
-      </li>
-      <li className="filter__item">
-        <input type="radio" name="level" id="easy" />
-        <label className="filter__label" htmlFor="easy"><span className="filter__label-text">Лёгкий</span>
-        </label>
-      </li>
-      <li className="filter__item">
-        <input type="radio" name="level" id="middle" />
-        <label className="filter__label" htmlFor="middle"><span className="filter__label-text">Средний</span>
-        </label>
-      </li>
-      <li className="filter__item">
-        <input type="radio" name="level" id="hard" />
-        <label className="filter__label" htmlFor="hard"><span className="filter__label-text">Сложный</span>
-        </label>
-      </li>
+      {Object.entries(LevelDictionary).map(([key, value]) => (
+        <li className="filter__item" key={key}>
+          <input type="radio" name="level" id={key} onChange={handleLevelChange} checked={checkedLevel === key}/>
+          <label className="filter__label" htmlFor={key}><span className="filter__label-text">{capitalize(value)}</span>
+          </label>
+        </li>
+      ))}
     </ul>
   );
 }

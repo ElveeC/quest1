@@ -30,4 +30,7 @@ const LevelDictionary = {
   [Level.Hard]: 'сложный'
 } as const;
 
-export { AuthorizationStatus, AppRoute, LevelDictionary, Level };
+const INITIAL_LEVEL = 'any';
+
+
+export { AuthorizationStatus, AppRoute, LevelDictionary, Level, INITIAL_LEVEL };
