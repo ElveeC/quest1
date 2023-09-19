@@ -1,6 +1,9 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import { ChangeEvent } from 'react';
-import { LevelDictionary, INITIAL_LEVEL } from '../../const';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeLevel } from '../../store/action';
+import { LevelDictionary/*, INITIAL_LEVEL*/ } from '../../const';
 import { capitalize } from '../../utils';
 
 /*type LevelListProps = {
@@ -8,13 +11,17 @@ import { capitalize } from '../../utils';
 }*/
 
 function LevelList (/*{ checkedLevel }: LevelListProps*/) {
+  const dispatch = useAppDispatch();
+  const checkedLevel = useAppSelector((state) => state.checkedLevel);
 
-  const [checkedLevel, setCheckedLevel] = useState(INITIAL_LEVEL);
+  //const [checkedLevel, setCheckedLevel] = useState(INITIAL_LEVEL);
+
   const handleLevelChange = (evt: ChangeEvent) => {
-    if (!evt.currentTarget.id) {
+    if (!evt.target.id) {
       return;
     }
-    setCheckedLevel(evt.target.id);
+    //setCheckedLevel(evt.target.id);
+    dispatch(changeLevel(evt.target.id));
   };
 
   return (

@@ -1,5 +1,6 @@
 //import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { GenreFilter } from '../../components/genre-filter/genre-filter';
@@ -8,6 +9,8 @@ import { LevelFilter } from '../../components/level-filter/level-filter';
 import { QuestList } from '../../components/quest-list/quest-list';
 //import { LevelList } from '../../components/level-list/level-list';
 import { AppRoute } from '../../const';
+import { filterQuests } from '../../utils';
+
 //import { quests } from '../../mocks/quest-mocks';
 import { QuestType } from '../../types/quest-type';
 //import { AuthorizationStatus } from '../../const';
@@ -19,10 +22,14 @@ import { QuestType } from '../../types/quest-type';
 type MainPageProps = {
   isAuthorized: boolean;
   quests: QuestType[];
-
 }
 
 function MainPage ({ isAuthorized, quests }: MainPageProps) {
+
+  const checkedGenre = useAppSelector((state) => state.checkedGenre);
+  const checkedLevel = useAppSelector((state) => state.checkedLevel);
+
+  const filteredQuests = filterQuests(checkedGenre, checkedLevel, quests);
 
   //const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -46,7 +53,16 @@ function MainPage ({ isAuthorized, quests }: MainPageProps) {
             </form>
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
-          <QuestList quests={quests}/>
+          {
+            filteredQuests.length
+              ?
+              <QuestList quests={filteredQuests}/>
+              :
+              <div>
+                <p>Мы ещё не успели создать квесты, соответствующие вашему запросу :(</p>
+                <p>Попробуйте изменить фильтры</p>
+              </div>
+          }
         </div>
       </main>
       <Footer />

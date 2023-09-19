@@ -1,5 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+
 import { MainPage } from '../../pages/main-page/main-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { QuestPage } from '../../pages/quest-page/quest-page';
@@ -9,13 +10,14 @@ import { ContactsPage } from '../../pages/contacts-page/contacts-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { quests, detailedQuests } from '../../mocks/quest-mocks';
+import { useAppSelector } from '../../hooks';
+import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
 
 type AppProps = {
   authorizationStatus: AuthorizationStatus;
 }
 function App ({ authorizationStatus }: AppProps) {
-
+  const quests = useAppSelector((state) => state.quests);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
