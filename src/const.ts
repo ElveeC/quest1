@@ -16,4 +16,18 @@ const enum AppRoute {
   NotFound = '/notfound',
 }
 
-export { AuthorizationStatus, AppRoute };
+const enum Level {
+  Any = 'any',
+  Easy = 'easy',
+  Medium = 'medium',
+  Hard = 'hard',
+}
+
+const LevelDictionary = {
+  [Level.Any]: 'любой',
+  [Level.Easy]: 'простой',
+  [Level.Medium]: 'средний',
+  [Level.Hard]: 'сложный'
+} as const;
+
+export { AuthorizationStatus, AppRoute, LevelDictionary, Level };

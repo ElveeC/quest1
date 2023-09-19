@@ -4,16 +4,16 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../const';
-import { QuestType } from '../../types/quest-type';
+import { DetailedQuestType } from '../../types/quest-type';
 
 type QuestPageProps = {
   isAuthorized: boolean;
-  quests: QuestType[];
+  detailedQuests: DetailedQuestType[];
 }
 
-function QuestPage ({ isAuthorized, quests }: QuestPageProps) {
+function QuestPage ({ isAuthorized, detailedQuests }: QuestPageProps) {
   const questToShow = useParams();
-  const selectedQuest = quests.find((quest) => quest.id === questToShow.id);
+  const selectedQuest = detailedQuests.find((detailedQuest) => detailedQuest.id === questToShow.id);
 
   if (!selectedQuest) {
     return <NotFoundPage />;
@@ -25,8 +25,8 @@ function QuestPage ({ isAuthorized, quests }: QuestPageProps) {
     level,
     peopleMinMax,
     description,
-    previewImg,
-    previewImgWebp,
+    //previewImg,
+    //previewImgWebp,
     coverImg,
     coverImgWebp
   } = selectedQuest;
@@ -40,8 +40,8 @@ function QuestPage ({ isAuthorized, quests }: QuestPageProps) {
       <main className="decorated-page quest-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
-            <source type="image/webp" srcSet={`${previewImgWebp}, ${coverImgWebp} 2x`} />
-            <img src={previewImg} srcSet={`${coverImg} 2x`} width="1366" height="768" alt={title} />
+            <source type="image/webp" srcSet={`${coverImgWebp}, ${coverImgWebp} 2x`} />
+            <img src={coverImg} srcSet={`${coverImg} 2x`} width="1366" height="768" alt={`${title}.`} />
           </picture>
         </div>
         <div className="container container--size-l">

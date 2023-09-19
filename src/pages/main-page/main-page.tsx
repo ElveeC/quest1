@@ -6,7 +6,8 @@ import { QuestGenreList } from '../../components/quest-genre-list/quest-genre-li
 import { QuestList } from '../../components/quest-list/quest-list';
 import { LevelList } from '../../components/level-list/level-list';
 import { AppRoute } from '../../const';
-import { QUESTS } from '../../mocks/quest-mocks';
+//import { quests } from '../../mocks/quest-mocks';
+import { QuestType } from '../../types/quest-type';
 //import { AuthorizationStatus } from '../../const';
 
 /*type MainPageProps = {
@@ -15,9 +16,11 @@ import { QUESTS } from '../../mocks/quest-mocks';
 
 type MainPageProps = {
   isAuthorized: boolean;
+  quests: QuestType[];
+
 }
 
-function MainPage ({ isAuthorized }: MainPageProps) {
+function MainPage ({ isAuthorized, quests }: MainPageProps) {
 
   //const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -47,7 +50,7 @@ function MainPage ({ isAuthorized }: MainPageProps) {
             </form>
           </div>
           <h2 className="title visually-hidden">Выберите квест</h2>
-          <QuestList quests={QUESTS}/>
+          <QuestList quests={quests}/>
         </div>
       </main>
       <Footer />

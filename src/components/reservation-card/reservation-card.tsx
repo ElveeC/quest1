@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, Level, LevelDictionary } from '../../const';
-import { QuestType } from '../../types/quest-type';
+import { AppRoute } from '../../const';
+import { ReservationType } from '../../types/quest-type';
 
-type QuestCardProps = {
-  quest: QuestType;
+type ReservationCardProps = {
+  reservation: ReservationType;
 }
 
-function QuestCard ({ quest }: QuestCardProps) {
+function ReservationCard ({ reservation }: ReservationCardProps) {
 
+  const { quest, date, time, location } = reservation;
   const { id, title, previewImg, previewImgWebp, peopleMinMax, level } = quest;
+
 
   return (
     <div className="quest-card" id={id}>
@@ -21,6 +23,7 @@ function QuestCard ({ quest }: QuestCardProps) {
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <Link className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>{title}</Link>
+          <span className="quest-card__info">[{date},&nbsp;{time}. {location.address}]</span>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">
@@ -31,12 +34,13 @@ function QuestCard ({ quest }: QuestCardProps) {
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
-            </svg>{LevelDictionary[level as Level]}
+            </svg>{level}
           </li>
         </ul>
+        <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>
       </div>
     </div>
   );
 }
 
-export { QuestCard };
+export { ReservationCard };
