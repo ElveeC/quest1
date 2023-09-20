@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import { MainPage } from '../../pages/main-page/main-page';
@@ -11,6 +11,8 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { LoadingPage } from '../../pages/loading-page/loading-page';
 
 import { PrivateRoute } from '../private-route/private-route';
+import { HistoryRouter } from '../history-router/history-router';
+import { browserHistory } from '../../browser-history';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
@@ -33,7 +35,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -78,7 +80,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
           />
 
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
 
   );
