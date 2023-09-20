@@ -1,3 +1,5 @@
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -14,6 +16,12 @@ export const enum AppRoute {
   MyQuests = '/my-quests',
   Contacts = '/contacts',
   NotFound = '/notfound',
+}
+
+export enum APIRoute {
+  Quests = '/quest',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const enum Level {

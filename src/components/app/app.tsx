@@ -8,16 +8,27 @@ import { MyQuestsPage } from '../../pages/my-quests-page/my-quests-page';
 import { BookingPage } from '../../pages/booking-page/booking-page';
 import { ContactsPage } from '../../pages/contacts-page/contacts-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
+import { LoadingPage } from '../../pages/loading-page/loading-page';
+
 import { PrivateRoute } from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
 
-type AppProps = {
+/*type AppProps = {
   authorizationStatus: AuthorizationStatus;
-}
-function App ({ authorizationStatus }: AppProps) {
+}*/
+function App (/*{ authorizationStatus }: AppProps*/) {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const quests = useAppSelector((state) => state.quests);
+  const areQuestsLoading = useAppSelector((state) => state.areQuestsLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || areQuestsLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
+
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
