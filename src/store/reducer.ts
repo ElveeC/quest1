@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { /*getQuests,*/ loadQuests, changeLevel, changeGenre, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
+import { /*getQuests,*/ loadQuests, changeLevel, changeGenre, requireAuthorization, setQuestsDataLoadingStatus } from './action';
 import { INITIAL_LEVEL, INITIAL_GENRE, AuthorizationStatus/*, DEFAULT_SORT_TYPE, sortingOptions, SortOption*/ } from '../const';
 //import { quests } from '../mocks/quest-mocks';
 import { QuestType } from '../types/quest-type';
@@ -10,7 +10,6 @@ type InitialState ={
   quests: QuestType[];
   authorizationStatus: AuthorizationStatus;
   areQuestsLoading: boolean;
-  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -20,7 +19,6 @@ const initialState: InitialState = {
   quests: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   areQuestsLoading: false,
-  error: null,
   //sortOption: SortOption.Popular
 };
 
@@ -49,10 +47,6 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })
-
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 
 });

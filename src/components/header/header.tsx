@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Logo } from '../logo/logo';
 import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 type HeaderProps = {
   isAuthorized: boolean;
@@ -9,6 +11,11 @@ type HeaderProps = {
 }
 
 function Header ({ isAuthorized, currentPage } : HeaderProps) {
+  const dispatch = useAppDispatch();
+  const handleSignOutClick = () => {
+    dispatch(logoutAction());
+  };
+
   return (
     <header className="header">
       <div className="container container--size-l">
@@ -43,7 +50,7 @@ function Header ({ isAuthorized, currentPage } : HeaderProps) {
           {
             isAuthorized
             &&
-            <Link className="btn btn--accent header__side-item" to={AppRoute.Main}>Выйти</Link>
+            <Link className="btn btn--accent header__side-item" onClick={handleSignOutClick} to={AppRoute.Main}>Выйти</Link>
           }
           {
             currentPage !== AppRoute.Login && !isAuthorized

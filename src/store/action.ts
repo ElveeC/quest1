@@ -26,8 +26,6 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const setQuestsDataLoadingStatus = createAction<boolean>('setQuestsDataLoadingStatus');
 
-export const setError = createAction<string | null>('setError');
-
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
 
 /*const changeSortOption = createAction('changeSortOption', (sortOption: string) => ({
