@@ -1,15 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { /*getQuests,*/ loadQuests, changeLevel, changeGenre, requireAuthorization, setQuestsDataLoadingStatus } from './action';
+import { /*getQuests,*/ loadQuests, loadDetailedQuest, changeLevel, changeGenre, requireAuthorization, setDetailedQuestLoadingStatus, setQuestsDataLoadingStatus } from './action';
 import { INITIAL_LEVEL, INITIAL_GENRE, AuthorizationStatus/*, DEFAULT_SORT_TYPE, sortingOptions, SortOption*/ } from '../const';
 //import { quests } from '../mocks/quest-mocks';
-import { QuestType } from '../types/quest-type';
+import { QuestType, DetailedQuestType } from '../types/quest-type';
 
 type InitialState ={
   checkedLevel: string;
   checkedGenre: string;
   quests: QuestType[];
+  detailedQuest: DetailedQuestType | null;
   authorizationStatus: AuthorizationStatus;
   areQuestsLoading: boolean;
+  isDetailedQuestLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -17,8 +19,10 @@ const initialState: InitialState = {
   checkedGenre: INITIAL_GENRE,
   //quests: quests,
   quests: [],
+  detailedQuest: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   areQuestsLoading: false,
+  isDetailedQuestLoading: false,
   //sortOption: SortOption.Popular
 };
 
@@ -33,8 +37,17 @@ const reducer = createReducer(initialState, (builder) => {
       state.quests = action.payload;
     })
 
+    .addCase(loadDetailedQuest, (state, action) => {
+      state.detailedQuest = action.payload;
+    })
+
+
     .addCase(setQuestsDataLoadingStatus, (state, action) => {
       state.areQuestsLoading = action.payload;
+    })
+
+    .addCase(setDetailedQuestLoadingStatus, (state, action) => {
+      state.isDetailedQuestLoading = action.payload;
     })
 
     .addCase(changeLevel, (state, action) => {

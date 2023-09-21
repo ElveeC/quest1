@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { QuestType } from '../types/quest-type';
+import { QuestType, DetailedQuestType } from '../types/quest-type';
 import { AppRoute, AuthorizationStatus } from '../const';
 
 /*type SortingType = {
@@ -22,9 +22,15 @@ export const loadQuests = createAction('loadQuests', (quests: QuestType[]) => ({
   payload: quests
 }));
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+export const loadDetailedQuest = createAction('loadDetailedQuest', (detailedQuest: DetailedQuestType) => ({
+  payload: detailedQuest
+}));
 
 export const setQuestsDataLoadingStatus = createAction<boolean>('setQuestsDataLoadingStatus');
+
+export const setDetailedQuestLoadingStatus = createAction<boolean>('setDetailedQuestLoadingStatus');
+
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
 

@@ -15,7 +15,7 @@ import { HistoryRouter } from '../history-router/history-router';
 import { browserHistory } from '../../browser-history';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
+//import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
 
 /*type AppProps = {
   authorizationStatus: AuthorizationStatus;
@@ -43,7 +43,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
           />
           <Route
             path={`${AppRoute.Quest}/:id`}
-            element={<QuestPage isAuthorized={isAuthorized} detailedQuests={detailedQuests}/>}
+            element={<QuestPage isAuthorized={isAuthorized}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -51,7 +51,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
           />
 
           <Route
-            path={AppRoute.Booking}
+            path={`${AppRoute.Quest}/:id${AppRoute.Booking}`}
 
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>

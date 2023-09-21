@@ -1,8 +1,8 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { QuestType } from '../types/quest-type.js';
-import { loadQuests, requireAuthorization, setQuestsDataLoadingStatus, redirectToRoute } from './action';
+import { QuestType, DetailedQuestType } from '../types/quest-type.js';
+import { loadQuests, loadDetailedQuest, requireAuthorization, setQuestsDataLoadingStatus, setDetailedQuestLoadingStatus, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -21,6 +21,22 @@ export const fetchQuestsAction = createAsyncThunk<void, undefined, {
     dispatch(setQuestsDataLoadingStatus(false));
   },
 );
+
+export const fetchDetailedQuestAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchDetailedQuest',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setDetailedQuestLoadingStatus(true));
+
+    const {data} = await api.get<DetailedQuestType>(`${APIRoute.Quests}/${id}`);
+    dispatch(loadDetailedQuest(data));
+    dispatch(setDetailedQuestLoadingStatus(false));
+  },
+);
+
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 //import { AuthorizationStatus } from './const';
 import { store } from './store';
 import { checkAuthAction, fetchQuestsAction } from './store/api-actions';
+import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchQuestsAction());
