@@ -20,6 +20,7 @@ export enum APIRoute {
   Quests = '/quest',
   Login = '/login',
   Logout = '/logout',
+  Booking = '/booking',
 }
 
 export const enum Level {

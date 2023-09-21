@@ -2,7 +2,8 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { QuestType, DetailedQuestType } from '../types/quest-type.js';
-import { loadQuests, loadDetailedQuest, requireAuthorization, setQuestsDataLoadingStatus, setDetailedQuestLoadingStatus, redirectToRoute } from './action';
+import { BookingItemType } from '../types/booking-item-type.js';
+import { loadQuests, loadDetailedQuest, loadBookingItems, requireAuthorization, setQuestsDataLoadingStatus, setDetailedQuestLoadingStatus, setBookingDataLoadingStatus, redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -34,6 +35,21 @@ export const fetchDetailedQuestAction = createAsyncThunk<void, string, {
     const {data} = await api.get<DetailedQuestType>(`${APIRoute.Quests}/${id}`);
     dispatch(loadDetailedQuest(data));
     dispatch(setDetailedQuestLoadingStatus(false));
+  },
+);
+
+export const fetchBookingItemsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchBookingItems',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setBookingDataLoadingStatus(true));
+
+    const {data} = await api.get<BookingItemType[]>(`${APIRoute.Quests}/${id}${APIRoute.Booking}`);
+    dispatch(loadBookingItems(data));
+    dispatch(setBookingDataLoadingStatus(false));
   },
 );
 

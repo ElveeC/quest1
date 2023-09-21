@@ -1,42 +1,79 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { BookingForm } from '../../components/boooking-form/booking-form';
+import { LoadingPage } from '../loading-page/loading-page';
+import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchBookingItemsAction } from '../../store/api-actions';
 
-type BookingPageProps = {
+/*type BookingPageProps = {
   isAuthorized: boolean;
-}
+}*/
 
-function BookingPage ({ isAuthorized }: BookingPageProps) {
+function BookingPage (/*{ isAuthorized }: BookingPageProps*/) {
+
+  const currentQuest = useParams();
+  const selectedQuest = useAppSelector((state) => state.detailedQuest);
+  const bookingItems = useAppSelector((state) => state.bookingItems);
+  const isBookingDataLoading = useAppSelector((state) => state.isBookingDataLoading);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (currentQuest.id) {
+      dispatch(fetchBookingItemsAction(currentQuest.id));
+    }
+  }, [dispatch, currentQuest.id]);
+
+  if (isBookingDataLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
+
+  if (!bookingItems || !selectedQuest) {
+    return <NotFoundPage />;
+  }
+
+  const {
+    title,
+    coverImg,
+    coverImgWebp
+  } = selectedQuest;
+
+
   return (
     <div className="wrapper">
       <Helmet>
         <title>Escape room. Бронирование квеста</title>
       </Helmet>
-      <Header isAuthorized={isAuthorized} currentPage={AppRoute.Booking} />
+      <Header isAuthorized currentPage={AppRoute.Booking} />
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>
-            <source type="image/webp" srcSet="img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x" />
-            <img src="img/content/maniac/maniac-bg-size-m.jpg" srcSet="img/content/maniac/maniac-bg-size-m@2x.jpg 2x" width="1366" height="1959" alt="" />
+            <source type="image/webp" srcSet={`${coverImgWebp}, ${coverImgWebp} 2x`} />
+            <img src={coverImg} srcSet={`${coverImg} 2x`} width="1366" height="768" alt={`${title}.`} />
           </picture>
         </div>
         <div className="container container--size-s">
           <div className="page-content__title-wrapper">
             <h1 className="subtitle subtitle--size-l page-content__subtitle">Бронирование квеста
             </h1>
-            <p className="title title--size-m title--uppercase page-content__title">Маньяк</p>
+            <p className="title title--size-m title--uppercase page-content__title">{title}</p>
           </div>
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
                 <div className="map__container"></div>
               </div>
-              <p className="booking-map__address">Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская</p>
+              <p className="booking-map__address">{bookingItems[0].location.address}</p>
             </div>
           </div>
-          <BookingForm />
+          <BookingForm todaysSlots={bookingItems[0].slots.today} tomorrowSlots={bookingItems[0].slots.tomorrow}/>
         </div>
       </main>
       <Footer />

@@ -1,17 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { /*getQuests,*/ loadQuests, loadDetailedQuest, changeLevel, changeGenre, requireAuthorization, setDetailedQuestLoadingStatus, setQuestsDataLoadingStatus } from './action';
+import { /*getQuests,*/ loadQuests, loadDetailedQuest, loadBookingItems, changeLevel, changeGenre, requireAuthorization, setDetailedQuestLoadingStatus, setBookingDataLoadingStatus, setQuestsDataLoadingStatus } from './action';
 import { INITIAL_LEVEL, INITIAL_GENRE, AuthorizationStatus/*, DEFAULT_SORT_TYPE, sortingOptions, SortOption*/ } from '../const';
 //import { quests } from '../mocks/quest-mocks';
 import { QuestType, DetailedQuestType } from '../types/quest-type';
+import { BookingItemType } from '../types/booking-item-type';
 
 type InitialState ={
   checkedLevel: string;
   checkedGenre: string;
   quests: QuestType[];
   detailedQuest: DetailedQuestType | null;
+  bookingItems: BookingItemType[];
   authorizationStatus: AuthorizationStatus;
   areQuestsLoading: boolean;
   isDetailedQuestLoading: boolean;
+  isBookingDataLoading: boolean;
 }
 
 const initialState: InitialState = {
@@ -20,9 +23,11 @@ const initialState: InitialState = {
   //quests: quests,
   quests: [],
   detailedQuest: null,
+  bookingItems: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   areQuestsLoading: false,
   isDetailedQuestLoading: false,
+  isBookingDataLoading: false,
   //sortOption: SortOption.Popular
 };
 
@@ -49,6 +54,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setDetailedQuestLoadingStatus, (state, action) => {
       state.isDetailedQuestLoading = action.payload;
     })
+
+    .addCase(loadBookingItems, (state, action) => {
+      state.bookingItems = action.payload;
+    })
+
+    .addCase(setBookingDataLoadingStatus, (state, action) => {
+      state.isBookingDataLoading = action.payload;
+    })
+
 
     .addCase(changeLevel, (state, action) => {
       state.checkedLevel = action.payload;

@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { QuestType, DetailedQuestType } from '../types/quest-type';
+import { BookingItemType } from '../types/booking-item-type';
 import { AppRoute, AuthorizationStatus } from '../const';
 
 /*type SortingType = {
@@ -22,13 +23,20 @@ export const loadQuests = createAction('loadQuests', (quests: QuestType[]) => ({
   payload: quests
 }));
 
+export const setQuestsDataLoadingStatus = createAction<boolean>('setQuestsDataLoadingStatus');
+
 export const loadDetailedQuest = createAction('loadDetailedQuest', (detailedQuest: DetailedQuestType) => ({
   payload: detailedQuest
 }));
 
-export const setQuestsDataLoadingStatus = createAction<boolean>('setQuestsDataLoadingStatus');
-
 export const setDetailedQuestLoadingStatus = createAction<boolean>('setDetailedQuestLoadingStatus');
+
+export const loadBookingItems = createAction('loadBookingItems', (bookingItems: BookingItemType[]) => ({
+  payload: bookingItems
+}));
+
+export const setBookingDataLoadingStatus = createAction<boolean>('setBookingLoadingStatus');
+
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 

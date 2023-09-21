@@ -55,7 +55,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
 
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <BookingPage isAuthorized={isAuthorized}/>
+                <BookingPage />
               </PrivateRoute>
             }
           />
