@@ -9,6 +9,7 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchBookingItemsAction } from '../../store/api-actions';
+import { Map } from '../../components/map/map';
 
 type BookingPageProps = {
   isAuthorized: boolean;
@@ -77,7 +78,7 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
-                <div className="map__container"></div>
+                <Map bookingItems={bookingItems} selectedLocation={bookingItems[0].location}/>
               </div>
               <p className="booking-map__address">{bookingItems[0].location.address}</p>
             </div>

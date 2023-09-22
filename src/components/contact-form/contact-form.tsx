@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//import { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 type FormData = {
   contactPerson: string;
@@ -21,9 +21,21 @@ function ContactForm () {
     setFormData({...formData, [evt.target.name]: evt.target.value});
   };*/
 
-  /*const handleNameChange = (evt: ChangeEvent) => {
-    setFormData({...formData, contactPerson: evt.target.value as string});
-  };*/
+  const handleNameChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, contactPerson: evt.target.value});
+  };
+
+  const handlePhoneChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, phone: evt.target.value});
+  };
+
+  const handlePeopleCountChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, peopleCount: Number(evt.target.value)});
+  };
+
+  const handleChildrenChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, withChildren: evt.target.checked});
+  };
 
   return (
     <fieldset className="booking-form__section">
@@ -36,9 +48,7 @@ function ContactForm () {
           name="name"
           placeholder="Имя"
           value={formData.contactPerson}
-          onChange={(evt) => {
-            setFormData({...formData, contactPerson: evt.target.value});
-          }}
+          onChange={handleNameChange}
           required
           pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
         />
@@ -51,9 +61,7 @@ function ContactForm () {
           name="tel"
           placeholder="Телефон"
           value={formData.phone}
-          onChange={(evt) => {
-            setFormData({...formData, phone: evt.target.value});
-          }}
+          onChange={handlePhoneChange}
           required
           pattern="[0-9]{10,}"
         />
@@ -65,10 +73,7 @@ function ContactForm () {
           id="person"
           name="person"
           placeholder="Количество участников"
-          value={formData.peopleCount}
-          onChange={(evt) => {
-            setFormData({...formData, peopleCount: Number(evt.target.value)});
-          }}
+          onChange={handlePeopleCountChange}
           required
         />
       </div>
@@ -78,9 +83,7 @@ function ContactForm () {
           id="children"
           name="children"
           checked={formData.withChildren}
-          onChange={(evt) => {
-            setFormData({...formData, withChildren: evt.target.checked});
-          }}
+          onChange={handleChildrenChange}
         />
         <span className="custom-checkbox__icon">
           <svg width="20" height="17" aria-hidden="true">
