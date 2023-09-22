@@ -10,16 +10,17 @@ import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchBookingItemsAction } from '../../store/api-actions';
 
-/*type BookingPageProps = {
+type BookingPageProps = {
   isAuthorized: boolean;
-}*/
+}
 
-function BookingPage (/*{ isAuthorized }: BookingPageProps*/) {
+function BookingPage ({ isAuthorized }: BookingPageProps) {
 
   const currentQuest = useParams();
   const selectedQuest = useAppSelector((state) => state.detailedQuest);
   const bookingItems = useAppSelector((state) => state.bookingItems);
   const isBookingDataLoading = useAppSelector((state) => state.isBookingDataLoading);
+  //const isDetailedQuestLoading = useAppSelector((state) => state.isDetailedQuestLoading);
 
   const dispatch = useAppDispatch();
 
@@ -29,13 +30,21 @@ function BookingPage (/*{ isAuthorized }: BookingPageProps*/) {
     }
   }, [dispatch, currentQuest.id]);
 
-  if (isBookingDataLoading) {
+  /*useEffect(() => {
+    if (selectedQuest?.id) {
+      dispatch(fetchBookingItemsAction(selectedQuest.id));
+    }
+  }, [dispatch, selectedQuest?.id]);*/
+  //console.log(currentQuest);
+
+
+  if (isBookingDataLoading /*|| isDetailedQuestLoading*/) {
     return (
       <LoadingPage />
     );
   }
 
-  if (!bookingItems || !selectedQuest) {
+  if (!bookingItems.length || !selectedQuest) {
     return <NotFoundPage />;
   }
 
@@ -51,7 +60,7 @@ function BookingPage (/*{ isAuthorized }: BookingPageProps*/) {
       <Helmet>
         <title>Escape room. Бронирование квеста</title>
       </Helmet>
-      <Header isAuthorized currentPage={AppRoute.Booking} />
+      <Header isAuthorized={isAuthorized} currentPage={AppRoute.Booking} />
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>

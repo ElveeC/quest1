@@ -18,7 +18,7 @@ function BookingForm ({todaysSlots, tomorrowSlots}: BookingFormProps) {
             {todaysSlots.map((slot) =>
               (
                 <label className="custom-radio booking-form__date" key={slot.time}>
-                  <input type="radio" id={`today${slot.time}`} name="date" required value={`today${slot.time}`} disabled={slot.isAvailable}/>
+                  <input type="radio" id={`today${slot.time}`} name="date" required value={`today${slot.time}`} disabled={!slot.isAvailable}/>
                   <span className="custom-radio__label">{slot.time}</span>
                 </label>
               )
