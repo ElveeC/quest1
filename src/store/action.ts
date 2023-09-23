@@ -3,15 +3,6 @@ import { QuestType, DetailedQuestType } from '../types/quest-type';
 import { BookingItemType } from '../types/booking-item-type';
 import { AppRoute, AuthorizationStatus } from '../const';
 
-/*type SortingType = {
-  sortingName: string;
-  sortingType: string;
-}*/
-
-/*export const getQuests = createAction('getQuests', (quests: QuestType[]) => ({
-  payload: quests
-}));*/
-
 export const loadQuests = createAction('loadQuests', (quests: QuestType[]) => ({
   payload: quests
 }));
@@ -45,9 +36,4 @@ export const changeLocation = createAction('changeLocation', (selectedLocation: 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
-
-/*const changeSortOption = createAction('changeSortOption', (sortOption: string) => ({
-  payload: sortOption
-}));*/
-
 

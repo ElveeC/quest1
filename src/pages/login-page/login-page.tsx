@@ -1,8 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-//import { useRef, FormEvent } from 'react';
-import { /*Link,*/ Navigate } from 'react-router-dom';
-import { /*useAppDispatch,*/ useAppSelector } from '../../hooks';
-//import { loginAction } from '../../store/api-actions';
+import { Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { LoginForm } from '../../components/login-form/login-form';
@@ -16,27 +14,11 @@ function LoginPage ({ isAuthorized }: LoginPageProps) {
   const selectedQuest = useAppSelector((state) => state.detailedQuest);
   const pageToNavigate = selectedQuest ? `${AppRoute.Quest}/${selectedQuest.id}${AppRoute.Booking}` : AppRoute.Main;
 
-  //const loginRef = useRef<HTMLInputElement | null>(null);
-  //const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  //const dispatch = useAppDispatch();
-
   if (selectedQuest && isAuthorized) {
     return (
       <Navigate to={pageToNavigate} />
     );
   }
-
-  /*const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        login: loginRef.current.value,
-        password: passwordRef.current.value
-      }));
-    }
-  };*/
 
   return (
     <div className="wrapper">
