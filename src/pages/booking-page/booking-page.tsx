@@ -20,6 +20,10 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
   const currentQuest = useParams();
   const selectedQuest = useAppSelector((state) => state.detailedQuest);
   const bookingItems = useAppSelector((state) => state.bookingItems);
+  let selectedLocation = useAppSelector((state) => state.selectedLocation);
+  if (selectedLocation === null || !bookingItems.some((bookingItem) => bookingItem.id === selectedLocation?.id)) {
+    selectedLocation = bookingItems[0];
+  }
   const isBookingDataLoading = useAppSelector((state) => state.isBookingDataLoading);
   //const isDetailedQuestLoading = useAppSelector((state) => state.isDetailedQuestLoading);
 
@@ -78,12 +82,12 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
-                <Map bookingItems={bookingItems} selectedLocation={bookingItems[0].location}/>
+                <Map bookingItems={bookingItems} /*selectedLocation={bookingItems[0].location}*//>
               </div>
-              <p className="booking-map__address">{bookingItems[0].location.address}</p>
+              <p className="booking-map__address">{selectedLocation.location.address}</p>
             </div>
           </div>
-          <BookingForm todaysSlots={bookingItems[0].slots.today} tomorrowSlots={bookingItems[0].slots.tomorrow}/>
+          <BookingForm todaysSlots={selectedLocation.slots.today} tomorrowSlots={selectedLocation.slots.tomorrow}/>
         </div>
       </main>
       <Footer />

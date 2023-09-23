@@ -7,13 +7,6 @@ import { AppRoute, AuthorizationStatus } from '../const';
   sortingName: string;
   sortingType: string;
 }*/
-export const changeLevel = createAction('changeLevel', (checkedLevel: string) => ({
-  payload: checkedLevel
-}));
-
-export const changeGenre = createAction('changeGenre', (checkedGenre: string) => ({
-  payload: checkedGenre
-}));
 
 /*export const getQuests = createAction('getQuests', (quests: QuestType[]) => ({
   payload: quests
@@ -37,6 +30,17 @@ export const loadBookingItems = createAction('loadBookingItems', (bookingItems: 
 
 export const setBookingDataLoadingStatus = createAction<boolean>('setBookingLoadingStatus');
 
+export const changeLevel = createAction('changeLevel', (checkedLevel: string) => ({
+  payload: checkedLevel
+}));
+
+export const changeGenre = createAction('changeGenre', (checkedGenre: string) => ({
+  payload: checkedGenre
+}));
+
+export const changeLocation = createAction('changeLocation', (selectedLocation: BookingItemType) => ({
+  payload: selectedLocation
+}));
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
