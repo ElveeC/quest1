@@ -47,7 +47,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginPage />}
+            element={<LoginPage isAuthorized={isAuthorized}/>}
           />
 
           <Route
