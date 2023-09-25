@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { ContactsMap } from '../../components/contacts-map/contacts-map';
 import { AppRoute } from '../../const';
 
 type ContactsPageProps = {
@@ -54,7 +55,7 @@ function ContactsPage ({ isAuthorized }: ContactsPageProps) {
             </dl>
             <div className="contacts__map">
               <div className="map">
-                <div className="map__container"></div>
+                <ContactsMap />
               </div>
             </div>
           </div>

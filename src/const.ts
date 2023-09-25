@@ -92,6 +92,11 @@ export const URL_MARKER_DEFAULT =
 export const URL_MARKER_CURRENT =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
+export const enum ContactsLocation {
+  Latitude = 59.968456,
+  Longitude = 30.31759,
+}
+
 /*export const GenreDictionary = {
   [QuestGenre.All]: 'все квесты',
   [QuestGenre.Adventure]: 'приключения',
