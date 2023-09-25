@@ -1,6 +1,6 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch/* useAppSelector*/ } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 
 function LoginForm () {
@@ -10,15 +10,36 @@ function LoginForm () {
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const REGEX_EMAIL = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+  const REGEX_PASSWORD = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{3,15}$/;
+
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [isChecked, setChecked] = useState(false);
+
+
+  const isPasswordValid = REGEX_PASSWORD.test(password);
+  const isEmailValid = REGEX_EMAIL.test(login);
+  const isDisabled = !login || !isPasswordValid || !isChecked || !isEmailValid;
+
+  const handleLoginChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setLogin(evt.target.value);
+  };
+  const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setPassword(evt.target.value);
+  };
+
+  const handleCheckedChange = () => {
+    setChecked((prevCheckState) => !prevCheckState);
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        login: loginRef.current.value,
-        password: passwordRef.current.value
-      }));
-    }
+    dispatch(loginAction({
+      login: login,
+      password: password,
+    }));
   };
 
   return (
@@ -26,7 +47,7 @@ function LoginForm () {
       className="login-form"
       action="https://echo.htmlacademy.ru/"
       method="post"
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <div className="login-form__inner-wrapper">
         <h1 className="title title--size-s login-form__title">Вход</h1>
@@ -40,6 +61,7 @@ function LoginForm () {
               name="email"
               placeholder="Адрес электронной почты"
               required
+              onChange={handleLoginChange}
             />
           </div>
           <div className="custom-input login-form__input">
@@ -51,13 +73,23 @@ function LoginForm () {
               name="password"
               placeholder="Пароль"
               required
+              onChange={handlePasswordChange}
             />
           </div>
         </div>
-        <button className="btn btn--accent btn--general login-form__submit" type="submit">Войти</button>
+        <button className="btn btn--accent btn--general login-form__submit" type="submit" disabled={isDisabled}>Войти</button>
+        {!isPasswordValid && (
+          <p> Пароль содержать минимум 1 цифру и 1 букву и состоять не менее чем из 3 символов</p>
+        )}
+        {!isEmailValid && (
+          <p> Укажите корректный адрес электронной почты</p>
+        )}
+        {!isChecked && (
+          <p> Подтвердите согласие на обработку персональных данных</p>
+        )}
       </div>
       <label className="custom-checkbox login-form__checkbox">
-        <input type="checkbox" id="id-order-agreement" name="user-agreement" required />
+        <input type="checkbox" id="id-order-agreement" name="user-agreement" required onChange={handleCheckedChange}/>
         <span className="custom-checkbox__icon">
           <svg width="20" height="17" aria-hidden="true">
             <use xlinkHref="#icon-tick"></use>

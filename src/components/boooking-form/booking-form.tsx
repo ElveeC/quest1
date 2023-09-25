@@ -133,7 +133,6 @@ function BookingForm ({/*todaysSlots, tomorrowSlots*/ selectedLocation, slots/*,
       className="booking-form"
       action="https://echo.htmlacademy.ru/"
       method="post"
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit}
     >
       <fieldset className="booking-form__section">
@@ -175,6 +174,7 @@ function BookingForm ({/*todaysSlots, tomorrowSlots*/ selectedLocation, slots/*,
             placeholder="Имя"
             value={formData.contactPerson}
             onChange={handleNameChange}
+            required
           />
         </div>
         <div className="custom-input booking-form__input">

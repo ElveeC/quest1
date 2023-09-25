@@ -40,15 +40,6 @@ export const LevelDictionary = {
 
 export const INITIAL_LEVEL = 'any';
 
-/*export const enum QuestGenre {
-  All = 'all',
-  Adventure = 'adventures',
-  Horror = 'horror',
-  Mystic = 'mystic',
-  Detective = 'detective',
-  SciFi = 'sci-fi'
-}*/
-
 export const QuestGenre = {
   All: {
     id: 'all',
@@ -96,25 +87,3 @@ export const enum ContactsLocation {
   Latitude = 59.968456,
   Longitude = 30.31759,
 }
-
-/*export const GenreDictionary = {
-  [QuestGenre.All]: 'все квесты',
-  [QuestGenre.Adventure]: 'приключения',
-  [QuestGenre.Horror]: 'ужасы',
-  [QuestGenre.Mystic]: 'мистика',
-  [QuestGenre.Detective]: 'детектив',
-  [QuestGenre.SciFi]: 'sci-fi'
-
-} as const;
-
-export const GenreIcons = {
-  [QuestGenre.All]: 'all-quests',
-  [QuestGenre.Adventure]: 'adventure',
-  [QuestGenre.Horror]: 'horror',
-  [QuestGenre.Mystic]: 'mystic',
-  [QuestGenre.Detective]: 'detective',
-  [QuestGenre.SciFi]: 'sci-fi'
-
-} as const;*/
-
-//export { AuthorizationStatus, AppRoute, LevelDictionary, Level, INITIAL_LEVEL, QuestGenre };
