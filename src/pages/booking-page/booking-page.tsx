@@ -87,7 +87,11 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
               <p className="booking-map__address">{selectedLocation.location.address}</p>
             </div>
           </div>
-          <BookingForm todaysSlots={selectedLocation.slots.today} tomorrowSlots={selectedLocation.slots.tomorrow}/>
+          <BookingForm
+            slots={selectedLocation.slots}
+            selectedLocation={selectedLocation}
+            quetsId={selectedQuest.id}
+          />
         </div>
       </main>
       <Footer />

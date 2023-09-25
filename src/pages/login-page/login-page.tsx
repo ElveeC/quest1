@@ -20,6 +20,12 @@ function LoginPage ({ isAuthorized }: LoginPageProps) {
     );
   }
 
+  if (!selectedQuest && isAuthorized) {
+    return (
+      <Navigate to={AppRoute.Main}/>
+    );
+  }
+
   return (
     <div className="wrapper">
       <Helmet>

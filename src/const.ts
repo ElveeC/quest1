@@ -17,10 +17,11 @@ export const enum AppRoute {
 }
 
 export enum APIRoute {
-  Quests = '/quest',
+  Quest = '/quest',
   Login = '/login',
   Logout = '/logout',
   Booking = '/booking',
+  Reservation ='/reservation',
 }
 
 export const enum Level {

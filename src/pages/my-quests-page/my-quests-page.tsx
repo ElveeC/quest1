@@ -1,16 +1,25 @@
 import { Helmet } from 'react-helmet-async';
+import { Navigate } from 'react-router-dom';
 //import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { ReservationList } from '../../components/reservation-list/reservation-list';
 import { AppRoute } from '../../const';
-import { reservations } from '../../mocks/reservation-mocks';
+//import { useAppSelector } from '../../hooks';
+//import { reservations } from '../../mocks/reservation-mocks';
 
-/*type MyQuestsPageProps = {
+type MyQuestsPageProps = {
   isAuthorized: boolean;
-}*/
+}
 
-function MyQuestsPage () {
+function MyQuestsPage ({ isAuthorized }: MyQuestsPageProps) {
+
+  if (!isAuthorized) {
+    return (
+      <Navigate to={AppRoute.Main}/>
+    );
+  }
+
   return (
     <div className="wrapper">
       <Helmet>
@@ -28,7 +37,7 @@ function MyQuestsPage () {
           <div className="page-content__title-wrapper">
             <h1 className="title title--size-m page-content__title">Мои бронирования</h1>
           </div>
-          <ReservationList reservations={reservations}/>
+          <ReservationList /*reservations={reservations}*//>
         </div>
       </main>
       <Footer />

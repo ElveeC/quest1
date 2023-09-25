@@ -69,7 +69,7 @@ function App (/*{ authorizationStatus }: AppProps*/) {
             path={AppRoute.MyQuests}
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <MyQuestsPage />
+                <MyQuestsPage isAuthorized={isAuthorized}/>
               </PrivateRoute>
             }
           />

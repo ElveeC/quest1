@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadQuests, loadDetailedQuest, loadBookingItems, changeLevel, changeGenre, changeLocation, requireAuthorization, setDetailedQuestLoadingStatus, setBookingDataLoadingStatus, setQuestsDataLoadingStatus } from './action';
+import { loadQuests, loadDetailedQuest, loadBookingItems, loadReservations, addBooking, setBookingAddingStatus, setReservationsLoadingStatus, changeLevel, changeGenre, changeLocation, requireAuthorization, setDetailedQuestLoadingStatus, setBookingDataLoadingStatus, setQuestsDataLoadingStatus } from './action';
 import { INITIAL_LEVEL, INITIAL_GENRE, AuthorizationStatus } from '../const';
-import { QuestType, DetailedQuestType } from '../types/quest-type';
+import { QuestType, DetailedQuestType, ReservationType } from '../types/quest-type';
+import { BookedQuestType } from '../types/booked-quest-type';
 import { BookingItemType } from '../types/booking-item-type';
 
 type InitialState ={
@@ -10,10 +11,14 @@ type InitialState ={
   quests: QuestType[];
   detailedQuest: DetailedQuestType | null;
   bookingItems: BookingItemType[];
+  reservations: ReservationType[];
+  bookedQuest: BookedQuestType | null;
   authorizationStatus: AuthorizationStatus;
   areQuestsLoading: boolean;
   isDetailedQuestLoading: boolean;
   isBookingDataLoading: boolean;
+  isBookingAdding: boolean;
+  areReservationsLoading: boolean;
   selectedLocation: BookingItemType | null;
 }
 
@@ -23,10 +28,14 @@ const initialState: InitialState = {
   quests: [],
   detailedQuest: null,
   bookingItems: [],
+  reservations: [],
+  bookedQuest: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   areQuestsLoading: false,
   isDetailedQuestLoading: false,
   isBookingDataLoading: false,
+  isBookingAdding: false,
+  areReservationsLoading: false,
   selectedLocation: null,
 };
 
@@ -36,13 +45,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadQuests, (state, action) => {
       state.quests = action.payload;
     })
+    .addCase(setQuestsDataLoadingStatus, (state, action) => {
+      state.areQuestsLoading = action.payload;
+    })
 
     .addCase(loadDetailedQuest, (state, action) => {
       state.detailedQuest = action.payload;
-    })
-
-    .addCase(setQuestsDataLoadingStatus, (state, action) => {
-      state.areQuestsLoading = action.payload;
     })
 
     .addCase(setDetailedQuestLoadingStatus, (state, action) => {
@@ -55,6 +63,22 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(setBookingDataLoadingStatus, (state, action) => {
       state.isBookingDataLoading = action.payload;
+    })
+
+    .addCase(setBookingAddingStatus, (state, action) => {
+      state.isBookingAdding = action.payload;
+    })
+
+    .addCase(loadReservations, (state, action) => {
+      state.reservations = action.payload;
+    })
+
+    .addCase(setReservationsLoadingStatus, (state, action) => {
+      state.areReservationsLoading = action.payload;
+    })
+
+    .addCase(addBooking, (state, action) => {
+      state.bookedQuest = action.payload;
     })
 
     .addCase(changeLevel, (state, action) => {

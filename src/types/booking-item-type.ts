@@ -8,11 +8,13 @@ export type SlotType = {
   isAvailable: boolean;
 };
 
+export type Slots = {
+  today: SlotType[];
+  tomorrow: SlotType[];
+}
+
 export type BookingItemType = {
   id: string;
   location: LocationType;
-  slots: {
-    today: SlotType[];
-    tomorrow: SlotType[];
-  };
+  slots: Slots;
 };
