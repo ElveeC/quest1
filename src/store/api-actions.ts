@@ -84,6 +84,27 @@ export const addBookingAction = createAsyncThunk<BookedQuestType, BookingDataTyp
   }
 );
 
+/*export const deleteReservationAction = createAsyncThunk<void, string, ThunkAPI> (
+  `${NameSpace.Reservation}/delete`,
+  async (reservationId, {dispatch, extra: api}) => {
+    await api.delete(`${APIRoute.Reservation}/${reservationId}`);
+    dispatch(fetchBookedQuestsAction);
+  }
+);*/
+
+export const deleteReservationAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'deleteReservation',
+  async (id, {/*dispatch*/ extra: api}) => {
+    await api.delete(`${AppRoute.Reservation}/${id}`);
+    //dispatch(fetchReservationsAction);
+
+  }
+);
+
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

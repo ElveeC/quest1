@@ -34,6 +34,8 @@ export const addBooking = createAction('addReservation', (bookedQuest: BookedQue
 
 export const setBookingAddingStatus = createAction<boolean>('setBookingAddingStatus');
 
+export const deleteReservation = createAction<string>('deleteReservation');
+
 export const changeLevel = createAction('changeLevel', (checkedLevel: string) => ({
   payload: checkedLevel
 }));

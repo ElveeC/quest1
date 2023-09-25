@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { LoadingPage } from '../../pages/loading-page/loading-page';
 import { AppRoute } from '../../const';
 import { ReservationType } from '../../types/quest-type';
+import { deleteReservationAction, fetchReservationsAction } from '../../store/api-actions';
+
 
 type ReservationCardProps = {
   reservation: ReservationType;
@@ -8,9 +12,22 @@ type ReservationCardProps = {
 
 function ReservationCard ({ reservation }: ReservationCardProps) {
 
+  const dispatch = useAppDispatch();
   const { quest, date, time, location } = reservation;
   const { id, title, previewImg, previewImgWebp, peopleMinMax, level } = quest;
 
+  const areReservationsLoading = useAppSelector((state) => state.areReservationsLoading);
+
+  const handleDeleteButtonClick = () => {
+    if (reservation.id) {
+      dispatch(deleteReservationAction(reservation.id));
+      dispatch(fetchReservationsAction());
+    }
+  };
+
+  if (areReservationsLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="quest-card" id={id}>
@@ -37,7 +54,7 @@ function ReservationCard ({ reservation }: ReservationCardProps) {
             </svg>{level}
           </li>
         </ul>
-        <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>
+        <button className="btn btn--accent btn--secondary quest-card__btn" type="button" onClick={handleDeleteButtonClick}>Отменить</button>
       </div>
     </div>
   );
