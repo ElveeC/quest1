@@ -1,25 +1,15 @@
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
-
-type FormData = {
-  contactPerson: string;
-  phone: string;
-  peopleCount: number;
-  withChildren: boolean;
-}
+import { FormData } from '../../types/form-data';
 
 function ContactForm () {
+
   const [formData, setFormData] = useState<FormData>({
     contactPerson: '',
     phone: '',
     peopleCount: 1,
     withChildren: false,
   });
-
-  /*const handleFieldChange = (evt) => {
-    //const {name, value} = evt.target;
-    setFormData({...formData, [evt.target.name]: evt.target.value});
-  };*/
 
   const handleNameChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, contactPerson: evt.target.value});

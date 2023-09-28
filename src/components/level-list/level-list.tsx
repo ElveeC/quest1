@@ -1,26 +1,20 @@
-//import { useState } from 'react';
 import { ChangeEvent } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeLevel } from '../../store/action';
-import { LevelDictionary/*, INITIAL_LEVEL*/ } from '../../const';
+import { changeLevel } from '../../store/data-process/data-process';
+import { LevelDictionary } from '../../const';
+import { getCheckeLevel } from '../../store/data-process/data-process-selectors';
+
 import { capitalize } from '../../utils';
 
-/*type LevelListProps = {
-  checkedLevel: string;
-}*/
-
-function LevelList (/*{ checkedLevel }: LevelListProps*/) {
+function LevelList () {
   const dispatch = useAppDispatch();
-  const checkedLevel = useAppSelector((state) => state.checkedLevel);
-
-  //const [checkedLevel, setCheckedLevel] = useState(INITIAL_LEVEL);
+  const checkedLevel = useAppSelector(getCheckeLevel);
 
   const handleLevelChange = (evt: ChangeEvent) => {
     if (!evt.target.id) {
       return;
     }
-    //setCheckedLevel(evt.target.id);
     dispatch(changeLevel(evt.target.id));
   };
 

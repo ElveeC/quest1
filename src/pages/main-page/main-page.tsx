@@ -1,23 +1,14 @@
-//import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { GenreFilter } from '../../components/genre-filter/genre-filter';
 import { LevelFilter } from '../../components/level-filter/level-filter';
-//import { QuestGenreList } from '../../components/quest-genre-list/quest-genre-list';
 import { QuestList } from '../../components/quest-list/quest-list';
-//import { LevelList } from '../../components/level-list/level-list';
 import { AppRoute } from '../../const';
 import { filterQuests } from '../../utils';
-
-//import { quests } from '../../mocks/quest-mocks';
 import { QuestType } from '../../types/quest-type';
-//import { AuthorizationStatus } from '../../const';
-
-/*type MainPageProps = {
-  authorizationStatus: AuthorizationStatus.Auth | AuthorizationStatus.NoAuth;
-}*/
+import { getCheckeLevel, getCheckedGenre } from '../../store/data-process/data-process-selectors';
 
 type MainPageProps = {
   isAuthorized: boolean;
@@ -26,12 +17,10 @@ type MainPageProps = {
 
 function MainPage ({ isAuthorized, quests }: MainPageProps) {
 
-  const checkedGenre = useAppSelector((state) => state.checkedGenre);
-  const checkedLevel = useAppSelector((state) => state.checkedLevel);
+  const checkedGenre = useAppSelector(getCheckedGenre);
+  const checkedLevel = useAppSelector(getCheckeLevel);
 
   const filteredQuests = filterQuests(checkedGenre, checkedLevel, quests);
-
-  //const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   return (
     <div className="wrapper">

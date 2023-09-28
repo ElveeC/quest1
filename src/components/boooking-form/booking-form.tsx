@@ -1,46 +1,21 @@
 import { FormEvent, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks';
 import { BookingItemType, Slots } from '../../types/booking-item-type';
 import { BookedQuestType, BookingDataType } from '../../types/booked-quest-type';
+import { FormData } from '../../types/form-data';
 import { addBookingAction } from '../../store/api-actions';
 import { AppRoute } from '../../const';
-//import { DetailedQuestType } from '../../types/quest-type';
-
-//import { ContactForm } from '../contact-form/contact-form';
-
 
 type BookingFormProps = {
-  //todaysSlots: SlotType[];
-  //tomorrowSlots: SlotType[];
- //bookingItem: BookingItemType;
   slots: Slots;
   selectedLocation: BookingItemType;
   //peopleNumber: number[];
   quetsId: string;
 };
 
-type FormData = {
-  contactPerson: string;
-  phone: string;
-  peopleCount: number;
-  withChildren: boolean;
-}
-
-/*type ValidationData = {
-  contactPerson: string;
-  phone: string;
-  userAgreement: string;
-  peopleCount: number;
-  time: {
-    time: string;
-    date: string;
-  };
-}*/
-
-function BookingForm ({/*todaysSlots, tomorrowSlots*/ selectedLocation, slots/*, peopleNumber*/, quetsId }: BookingFormProps) {
+function BookingForm ({selectedLocation, slots/*, peopleNumber*/, quetsId }: BookingFormProps) {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -52,11 +27,6 @@ function BookingForm ({/*todaysSlots, tomorrowSlots*/ selectedLocation, slots/*,
     withChildren: false,
 
   });
-
-  /*const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
-    mode: 'onChange'
-  });*/
-
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -81,31 +51,6 @@ function BookingForm ({/*todaysSlots, tomorrowSlots*/ selectedLocation, slots/*,
     setSelectedDate(date);
     setSelectedTime(time);
   };
-
-
-  //const onSubmit: SubmitHandler<FormData> = (data) => {
-  // const bookedQuest: BookedQuestType = {
-  //date: selectedDate,
-  //time: selectedTime,
-  /*contactPerson: data.contactPerson,
-      withChildren: data.withChildren,
-      peopleCount: Number(data.peopleCount),
-      phone: data.phone,*/
-  //contactPerson: data.contactPerson,
-  //withChildren: data.withChildren,
-  //peopleCount: Number(data.peopleCount),
-  //phone: data.phone,
-  //placeId: selectedLocation.id
-  //};
-
-  /*const bookingData: BookingDataType = {
-      id: quetsId,
-      postData: bookedQuest
-    };
-
-    dispatch(addBookingAction({...bookingData}));
-    navigate(AppRoute.MyQuests);
-  };*/
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();

@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { QuestType, DetailedQuestType, ReservationType } from '../types/quest-type';
 import { BookedQuestType } from '../types/booked-quest-type';
 import { BookingItemType } from '../types/booking-item-type';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute/*, AuthorizationStatus*/ } from '../const';
 
 export const loadQuests = createAction('loadQuests', (quests: QuestType[]) => ({
   payload: quests
@@ -48,7 +48,7 @@ export const changeLocation = createAction('changeLocation', (selectedLocation: 
   payload: selectedLocation
 }));
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+/*export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');*/
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
 

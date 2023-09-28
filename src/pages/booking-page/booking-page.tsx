@@ -9,6 +9,7 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchBookingItemsAction } from '../../store/api-actions';
+import { getDetailedQuest, getDBookingItems, getSelectedLocation, getBookingItemsLoadingStatus } from '../../store/data-process/data-process-selectors';
 import { Map } from '../../components/map/map';
 
 type BookingPageProps = {
@@ -18,14 +19,13 @@ type BookingPageProps = {
 function BookingPage ({ isAuthorized }: BookingPageProps) {
 
   const currentQuest = useParams();
-  const selectedQuest = useAppSelector((state) => state.detailedQuest);
-  const bookingItems = useAppSelector((state) => state.bookingItems);
-  let selectedLocation = useAppSelector((state) => state.selectedLocation);
+  const selectedQuest = useAppSelector(getDetailedQuest);
+  const bookingItems = useAppSelector(getDBookingItems);
+  let selectedLocation = useAppSelector(getSelectedLocation);
   if (selectedLocation === null || !bookingItems.some((bookingItem) => bookingItem.id === selectedLocation?.id)) {
     selectedLocation = bookingItems[0];
   }
-  const isBookingDataLoading = useAppSelector((state) => state.isBookingDataLoading);
-  //const isDetailedQuestLoading = useAppSelector((state) => state.isDetailedQuestLoading);
+  const isBookingDataLoading = useAppSelector(getBookingItemsLoadingStatus);
 
   const dispatch = useAppDispatch();
 
@@ -35,15 +35,7 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
     }
   }, [dispatch, currentQuest.id]);
 
-  /*useEffect(() => {
-    if (selectedQuest?.id) {
-      dispatch(fetchBookingItemsAction(selectedQuest.id));
-    }
-  }, [dispatch, selectedQuest?.id]);*/
-  //console.log(currentQuest);
-
-
-  if (isBookingDataLoading /*|| isDetailedQuestLoading*/) {
+  if (isBookingDataLoading) {
     return (
       <LoadingPage />
     );
@@ -82,7 +74,7 @@ function BookingPage ({ isAuthorized }: BookingPageProps) {
           <div className="page-content__item">
             <div className="booking-map">
               <div className="map">
-                <Map bookingItems={bookingItems} /*selectedLocation={bookingItems[0].location}*//>
+                <Map bookingItems={bookingItems}/>
               </div>
               <p className="booking-map__address">{selectedLocation.location.address}</p>
             </div>

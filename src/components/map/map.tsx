@@ -6,6 +6,7 @@ import { BookingItemType } from '../../types/booking-item-type';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
 import { changeLocation } from '../../store/action';
+import { getSelectedLocation } from '../../store/data-process/data-process-selectors';
 
 type MapProps = {
   bookingItems: BookingItemType[];
@@ -27,7 +28,7 @@ function Map({ bookingItems }: MapProps) {
 
   const dispatch = useAppDispatch();
 
-  let selectedLocation = useAppSelector((state) => state.selectedLocation);
+  let selectedLocation = useAppSelector(getSelectedLocation);
 
   if (selectedLocation === null || !bookingItems.some((bookingItem) => bookingItem.id === selectedLocation?.id)) {
     selectedLocation = bookingItems[0];

@@ -87,3 +87,8 @@ export const enum ContactsLocation {
   Latitude = 59.968456,
   Longitude = 30.31759,
 }
+
+export enum NameSpace {
+  User = 'USER',
+  Data = 'DATA',
+}

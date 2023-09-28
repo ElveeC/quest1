@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ReservationCard } from '../reservation-card/reservation-card';
 import { LoadingPage } from '../../pages/loading-page/loading-page';
 import { fetchReservationsAction } from '../../store/api-actions';
+import { getReservations, getReservationsLoadingStatus, getAddBookingStatus } from '../../store/data-process/data-process-selectors';
 //import { ReservationType } from '../../types/quest-type';
 
 /*type ReservationListProps = {
@@ -11,9 +12,9 @@ import { fetchReservationsAction } from '../../store/api-actions';
 
 function ReservationList (/*{ reservations }: ReservationListProps*/) {
 
-  const reservations = useAppSelector((state) => state.reservations);
-  const areReservationsLoading = useAppSelector((state) => state.areReservationsLoading);
-  const isBookingAdding = useAppSelector((state) => state.isBookingAdding);
+  const reservations = useAppSelector(getReservations);
+  const areReservationsLoading = useAppSelector(getReservationsLoadingStatus);
+  const isBookingAdding = useAppSelector(getAddBookingStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

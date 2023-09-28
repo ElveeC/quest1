@@ -7,21 +7,18 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { LoadingPage } from '../loading-page/loading-page';
 import { AppRoute, Level, LevelDictionary, QuestGenre } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-//import { DetailedQuestType } from '../../types/quest-type';
 import { fetchDetailedQuestAction } from '../../store/api-actions';
+import { getDetailedQuest, getDetailedQuestLoadingStatus } from '../../store/data-process/data-process-selectors';
 
 type QuestPageProps = {
   isAuthorized: boolean;
-  //detailedQuests: DetailedQuestType[];
 }
 
-function QuestPage ({ isAuthorized/*, detailedQuests*/ }: QuestPageProps) {
-  //const questToShow = useParams();
-  //const selectedQuest = detailedQuests.find((detailedQuest) => detailedQuest.id === questToShow.id);
+function QuestPage ({ isAuthorized }: QuestPageProps) {
 
   const currentQuest = useParams();
-  const selectedQuest = useAppSelector((state) => state.detailedQuest);
-  const isDetailedQuestLoading = useAppSelector((state) => state.isDetailedQuestLoading);
+  const selectedQuest = useAppSelector(getDetailedQuest);
+  const isDetailedQuestLoading = useAppSelector(getDetailedQuestLoadingStatus);
 
   const dispatch = useAppDispatch();
 

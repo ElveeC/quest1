@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { LoginForm } from '../../components/login-form/login-form';
+import { getDetailedQuest } from '../../store/data-process/data-process-selectors';
 import { AppRoute } from '../../const';
 
 type LoginPageProps = {
@@ -11,7 +12,7 @@ type LoginPageProps = {
 }
 
 function LoginPage ({ isAuthorized }: LoginPageProps) {
-  const selectedQuest = useAppSelector((state) => state.detailedQuest);
+  const selectedQuest = useAppSelector(getDetailedQuest);
   const pageToNavigate = selectedQuest ? `${AppRoute.Quest}/${selectedQuest.id}${AppRoute.Booking}` : AppRoute.Main;
 
   if (selectedQuest && isAuthorized) {

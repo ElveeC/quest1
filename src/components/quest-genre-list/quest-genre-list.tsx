@@ -1,13 +1,13 @@
 import { ChangeEvent } from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre } from '../../store/action';
-import { QuestGenre/*, GenreDictionary, GenreIcons*/ } from '../../const';
+import { QuestGenre } from '../../const';
+import { getCheckedGenre } from '../../store/data-process/data-process-selectors';
+import { changeGenre } from '../../store/data-process/data-process';
 import { capitalize } from '../../utils';
 
 function QuestGenreList () {
   const dispatch = useAppDispatch();
-  const checkedGenre = useAppSelector((state) => state.checkedGenre);
+  const checkedGenre = useAppSelector(getCheckedGenre);
 
   const handleGenreChange = (evt: ChangeEvent) => {
     if (!evt.target.id) {
@@ -15,7 +15,6 @@ function QuestGenreList () {
     }
     dispatch(changeGenre(evt.target.id));
   };
-
 
   return (
     <ul className="filter__list">

@@ -14,18 +14,18 @@ import { PrivateRoute } from '../private-route/private-route';
 import { HistoryRouter } from '../history-router/history-router';
 import { browserHistory } from '../../browser-history';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/user-process-selectors';
+import { getQuests, getQuestsDataLoadingStatus } from '../../store/data-process/data-process-selectors';
 import { useAppSelector } from '../../hooks';
-//import { /*quests,*/ detailedQuests } from '../../mocks/quest-mocks';
 
-/*type AppProps = {
-  authorizationStatus: AuthorizationStatus;
-}*/
-function App (/*{ authorizationStatus }: AppProps*/) {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const quests = useAppSelector((state) => state.quests);
-  const areQuestsLoading = useAppSelector((state) => state.areQuestsLoading);
+function App () {
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || areQuestsLoading) {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const quests = useAppSelector(getQuests);
+  const areQuestsLoading = useAppSelector(getQuestsDataLoadingStatus);
+
+  if (!isAuthChecked || areQuestsLoading) {
     return (
       <LoadingPage />
     );
@@ -49,7 +49,6 @@ function App (/*{ authorizationStatus }: AppProps*/) {
             path={AppRoute.Login}
             element={<LoginPage isAuthorized={isAuthorized}/>}
           />
-
           <Route
             path={`${AppRoute.Quest}/:id${AppRoute.Booking}`}
 
@@ -59,12 +58,10 @@ function App (/*{ authorizationStatus }: AppProps*/) {
               </PrivateRoute>
             }
           />
-
           <Route
             path={AppRoute.Contacts}
             element={<ContactsPage isAuthorized={isAuthorized}/>}
           />
-
           <Route
             path={AppRoute.MyQuests}
             element={
@@ -73,16 +70,13 @@ function App (/*{ authorizationStatus }: AppProps*/) {
               </PrivateRoute>
             }
           />
-
           <Route
             path="*"
             element={<NotFoundPage />}
           />
-
         </Routes>
       </HistoryRouter>
     </HelmetProvider>
-
   );
 }
 

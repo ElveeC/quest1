@@ -4,7 +4,7 @@ import { LoadingPage } from '../../pages/loading-page/loading-page';
 import { AppRoute } from '../../const';
 import { ReservationType } from '../../types/quest-type';
 import { deleteReservationAction, fetchReservationsAction } from '../../store/api-actions';
-
+import { getReservationsLoadingStatus } from '../../store/data-process/data-process-selectors';
 
 type ReservationCardProps = {
   reservation: ReservationType;
@@ -16,7 +16,7 @@ function ReservationCard ({ reservation }: ReservationCardProps) {
   const { quest, date, time, location } = reservation;
   const { id, title, previewImg, previewImgWebp, peopleMinMax, level } = quest;
 
-  const areReservationsLoading = useAppSelector((state) => state.areReservationsLoading);
+  const areReservationsLoading = useAppSelector(getReservationsLoadingStatus);
 
   const handleDeleteButtonClick = () => {
     if (reservation.id) {
