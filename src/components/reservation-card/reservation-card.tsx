@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { LoadingPage } from '../../pages/loading-page/loading-page';
-import { AppRoute } from '../../const';
+import { AppRoute, Level, LevelDictionary, Date, DateDictionary } from '../../const';
 import { ReservationType } from '../../types/quest-type';
 import { deleteReservationAction, fetchReservationsAction } from '../../store/api-actions';
 import { getReservationsLoadingStatus } from '../../store/data-process/data-process-selectors';
@@ -40,7 +40,7 @@ function ReservationCard ({ reservation }: ReservationCardProps) {
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <Link className="quest-card__link" to={`${AppRoute.Quest}/${id}`}>{title}</Link>
-          <span className="quest-card__info">[{date},&nbsp;{time}. {location.address}]</span>
+          <span className="quest-card__info">[{DateDictionary[date as Date]},&nbsp;{time}. {location.address}]</span>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">
@@ -51,7 +51,7 @@ function ReservationCard ({ reservation }: ReservationCardProps) {
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
-            </svg>{level}
+            </svg>{LevelDictionary[level as Level]}
           </li>
         </ul>
         <button className="btn btn--accent btn--secondary quest-card__btn" type="button" onClick={handleDeleteButtonClick}>Отменить</button>

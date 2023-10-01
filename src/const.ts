@@ -40,6 +40,16 @@ export const LevelDictionary = {
 
 export const INITIAL_LEVEL = 'any';
 
+export const enum Date {
+  Today = 'today',
+  Tomorrow = 'tomorrow',
+}
+
+export const DateDictionary = {
+  [Date.Today]: 'сегодня',
+  [Date.Tomorrow]: 'завтра',
+} as const;
+
 export const QuestGenre = {
   All: {
     id: 'all',
